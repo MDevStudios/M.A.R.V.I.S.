@@ -39,6 +39,25 @@
       color: var(--accent-color);
       font-size: 1.2rem;
     }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .discord-head-btn {
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .discord-head-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
     .lang-switcher {
       display: flex;
       gap: 5px;
@@ -109,17 +128,19 @@
       flex-wrap: wrap;
       justify-content: center;
     }
-    .cta-btn.primary {
-      background: var(--accent-color);
-      color: #000000;
-      font-weight: bold;
-      border: 1px solid var(--accent-color);
-      padding: 14px 32px;
+    .cta-btn {
+      padding: 14px 28px;
       font-size: 0.95rem;
       border-radius: 4px;
       text-decoration: none;
       letter-spacing: 1px;
       transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    .cta-btn.primary {
+      background: var(--accent-color);
+      color: #000000;
+      border: 1px solid var(--accent-color);
     }
     .cta-btn.primary:hover {
       box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
@@ -129,12 +150,6 @@
       background: transparent;
       color: #ffffff;
       border: 1px solid #333333;
-      padding: 14px 32px;
-      font-size: 0.95rem;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
     }
     .cta-btn.secondary:hover {
       border-color: var(--accent-color);
@@ -387,6 +402,64 @@
       box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
     }
 
+    /* REQUISITOS DEL SISTEMA Y FAQ */
+    .info-section {
+      max-width: 1000px;
+      width: 90%;
+      margin: 40px 0;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 25px;
+    }
+    .spec-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 25px;
+    }
+    .spec-card h3 {
+      color: var(--accent-color);
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+    .spec-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .spec-card li {
+      margin-bottom: 10px;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .faq-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 25px;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 25px;
+    }
+    .faq-item h4 {
+      color: #ffffff;
+      font-size: 1.1rem;
+      margin: 0 0 10px 0;
+    }
+    .faq-item p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
     footer {
       margin-top: auto;
       padding: 30px;
@@ -408,9 +481,12 @@
 
   <header>
     <div class="logo">M.A.R.V.I.S.</div>
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-      <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+    <div class="header-right">
+      <a href="https://discord.gg/8Mg7VmVZ6" class="discord-head-btn" target="_blank">Discord Community</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+      </div>
     </div>
   </header>
 
@@ -428,6 +504,7 @@
     <div class="cta-group">
       <a href="https://marvisai.itch.io/marvis" class="cta-btn primary" target="_blank" id="btn-download">DOWNLOAD / ITCH.IO</a>
       <a href="https://gamejolt.com/games/MarvisIA/1108163" class="cta-btn secondary" target="_blank" id="btn-gamejolt">GAME JOLT DEVLOG</a>
+      <a href="https://discord.gg/8Mg7VmVZ6" class="cta-btn secondary" target="_blank" id="btn-discord">JOIN DISCORD</a>
     </div>
   </main>
 
@@ -567,13 +644,66 @@
     </div>
   </section>
 
+  <!-- SECCIÓN REQUISITOS DEL SISTEMA -->
+  <section class="info-section">
+    <div class="section-title">
+      <div class="hud-tag">// SYSTEM SPECS</div>
+      <h2 id="specs-title">System Requirements</h2>
+    </div>
+    <div class="specs-grid">
+      <div class="spec-card">
+        <h3 id="req-min-title">Minimum Requirements</h3>
+        <ul>
+          <li id="min-os"><strong>OS:</strong> Windows 10/11 (64-bit)</li>
+          <li id="min-cpu"><strong>CPU:</strong> Intel Core i5 (8th Gen) or AMD Ryzen 5</li>
+          <li id="min-ram"><strong>RAM:</strong> 8 GB System Memory</li>
+          <li id="min-gpu"><strong>GPU:</strong> Integrated Graphics or Dedicated (4GB VRAM)</li>
+          <li id="min-disk"><strong>Storage:</strong> 5 GB available space (SSD recommended)</li>
+        </ul>
+      </div>
+      <div class="spec-card">
+        <h3 id="req-rec-title">Recommended Requirements</h3>
+        <ul>
+          <li id="rec-os"><strong>OS:</strong> Windows 11 (64-bit)</li>
+          <li id="rec-cpu"><strong>CPU:</strong> Intel Core i7 / AMD Ryzen 7 or better</li>
+          <li id="rec-ram"><strong>RAM:</strong> 16 GB System Memory</li>
+          <li id="rec-gpu"><strong>GPU:</strong> NVIDIA RTX 2060 / AMD RX 6600 (6GB+ VRAM)</li>
+          <li id="rec-disk"><strong>Storage:</strong> NVMe SSD for fast model loading</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN FAQ -->
+  <section class="info-section">
+    <div class="section-title">
+      <div class="hud-tag">// FAQ</div>
+      <h2 id="faq-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4 id="faq1-q">Is M.A.R.V.I.S. really 100% local and private?</h4>
+        <p id="faq1-a">Yes. M.A.R.V.I.S. executes all LLM reasoning and processing directly on your computer's CPU/GPU. No text, prompts, or personal files are ever sent to remote cloud servers.</p>
+      </div>
+      <div class="faq-item">
+        <h4 id="faq2-q">How does the payment work? Are there hidden fees?</h4>
+        <p id="faq2-a">M.A.R.V.I.S. is sold exclusively through itch.io as a one-time purchase. There are no monthly subscriptions or hidden microtransactions. Pay once and use your license indefinitely.</p>
+      </div>
+      <div class="faq-item">
+        <h4 id="faq3-q">Where can I get support or request new features?</h4>
+        <p id="faq3-a">Join our official Discord community! You can report bugs, submit HUD widget suggestions, share setups, and chat directly with MDev Studios.</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    <p>© M.A.R.V.I.S. AI — MDevStudios</p>
+    <p>© M.A.R.V.I.S. AI — MDev Studios</p>
     <div>
-      <a href="https://www.tiktok.com/@getmarvis" target="_blank">TikTok</a> | 
-      <a href="https://gamejolt.com/games/MarvisIA/1108163" target="_blank">Game Jolt</a> | 
+      <a href="https://discord.gg/8Mg7VmVZ6" target="_blank">Discord</a> | 
       <a href="https://marvisai.itch.io/marvis" target="_blank">itch.io</a> | 
-      <a href="https://reddit.com/r/MarvisAI" target="_blank">Reddit</a>
+      <a href="https://gamejolt.com/games/MarvisIA/1108163" target="_blank">Game Jolt</a> | 
+      <a href="https://reddit.com/r/MarvisAI" target="_blank">Reddit</a> | 
+      <a href="https://www.tiktok.com/@getmarvis" target="_blank">TikTok</a>
     </div>
   </footer>
 
@@ -584,6 +714,7 @@
         desc: 'The ultimate local-first AI desktop assistant. Built for performance, absolute privacy, full system control, and zero monthly subscriptions.',
         download: 'DOWNLOAD / ITCH.IO',
         gamejolt: 'GAME JOLT DEVLOG',
+        discordBtn: 'JOIN DISCORD',
         aboutTitle: 'What is M.A.R.V.I.S.?',
         aboutDesc: 'M.A.R.V.I.S. was created with a clear mission: building the <strong>ultimate desktop AI assistant</strong>. Unlike cloud solutions that force monthly subscriptions and track your data, M.A.R.V.I.S. runs <strong>100% locally on your PC</strong>. It adapts precisely to your preferences, daily routines, and specialized tasks.',
         p1Title: '100% Local & Private',
@@ -632,13 +763,34 @@
         l3F2: 'Full automation & RPA macros',
         l3F3: 'Autonomous code & document generation',
         l3F4: 'Native executable terminal control',
-        l3Btn: 'GET DELUXE'
+        l3Btn: 'GET DELUXE',
+        specsTitle: 'System Requirements',
+        reqMinTitle: 'Minimum Requirements',
+        reqRecTitle: 'Recommended Requirements',
+        minOs: '<strong>OS:</strong> Windows 10/11 (64-bit)',
+        minCpu: '<strong>CPU:</strong> Intel Core i5 (8th Gen) or AMD Ryzen 5',
+        minRam: '<strong>RAM:</strong> 8 GB System Memory',
+        minGpu: '<strong>GPU:</strong> Integrated Graphics or Dedicated (4GB VRAM)',
+        minDisk: '<strong>Storage:</strong> 5 GB available space (SSD recommended)',
+        recOs: '<strong>OS:</strong> Windows 11 (64-bit)',
+        recCpu: '<strong>CPU:</strong> Intel Core i7 / AMD Ryzen 7 or better',
+        recRam: '<strong>RAM:</strong> 16 GB System Memory',
+        recGpu: '<strong>GPU:</strong> NVIDIA RTX 2060 / AMD RX 6600 (6GB+ VRAM)',
+        recDisk: '<strong>Storage:</strong> NVMe SSD for fast model loading',
+        faqTitle: 'Frequently Asked Questions',
+        faq1Q: 'Is M.A.R.V.I.S. really 100% local and private?',
+        faq1A: 'Yes. M.A.R.V.I.S. executes all LLM reasoning and processing directly on your computer\'s CPU/GPU. No text, prompts, or personal files are ever sent to remote cloud servers.',
+        faq2Q: 'How does the payment work? Are there hidden fees?',
+        faq2A: 'M.A.R.V.I.S. is sold exclusively through itch.io as a one-time purchase. There are no monthly subscriptions or hidden microtransactions. Pay once and use your license indefinitely.',
+        faq3Q: 'Where can I get support or request new features?',
+        faq3A: 'Join our official Discord community! You can report bugs, submit HUD widget suggestions, share setups, and chat directly with MDev Studios.'
       },
       es: {
         slogan: 'ChatGPT te dice cómo hacer las cosas. <br><span class="highlight">M.A.R.V.I.S. las hace por ti en tu PC.</span>',
         desc: 'El asistente de escritorio de inteligencia artificial local-first definitivo. Diseñado para rendimiento, privacidad absoluta, control total y cero suscripciones mensuales.',
         download: 'DESCARGAR / ITCH.IO',
         gamejolt: 'GAME JOLT DEVLOG',
+        discordBtn: 'UNIRSE A DISCORD',
         aboutTitle: '¿Qué es M.A.R.V.I.S.?',
         aboutDesc: 'M.A.R.V.I.S. nace con la misión de construir el <strong>asistente de IA de escritorio definitivo</strong>. A diferencia de las soluciones basadas en la nube que dependen de suscripciones y rastrean tus datos, M.A.R.V.I.S. funciona de manera <strong>100% local en tu computadora</strong>. Se adapta exactamente a tus gustos, preferencias y dedicaciones para ejecutar las tareas que necesitas en tu flujo de trabajo diario.',
         p1Title: '100% Local y Privado',
@@ -687,7 +839,27 @@
         l3F2: 'Automatización total y RPA mediante macros',
         l3F3: 'Generación autónoma de código y documentos',
         l3F4: 'Control de terminal ejecutable nativo',
-        l3Btn: 'OBTENER DELUXE'
+        l3Btn: 'OBTENER DELUXE',
+        specsTitle: 'Requisitos del Sistema',
+        reqMinTitle: 'Requisitos Mínimos',
+        reqRecTitle: 'Requisitos Recomendados',
+        minOs: '<strong>SO:</strong> Windows 10/11 (64-bit)',
+        minCpu: '<strong>CPU:</strong> Intel Core i5 (8ª gen) o AMD Ryzen 5',
+        minRam: '<strong>RAM:</strong> 8 GB Memoria del sistema',
+        minGpu: '<strong>GPU:</strong> Gráficos Integrados o Dedicada (4GB VRAM)',
+        minDisk: '<strong>Almacenamiento:</strong> 5 GB espacio disponible (SSD recomendado)',
+        recOs: '<strong>SO:</strong> Windows 11 (64-bit)',
+        recCpu: '<strong>CPU:</strong> Intel Core i7 / AMD Ryzen 7 o superior',
+        recRam: '<strong>RAM:</strong> 16 GB Memoria del sistema',
+        recGpu: '<strong>GPU:</strong> NVIDIA RTX 2060 / AMD RX 6600 (6GB+ VRAM)',
+        recDisk: '<strong>Almacenamiento:</strong> NVMe SSD para carga rápida',
+        faqTitle: 'Preguntas Frecuentes',
+        faq1Q: '¿M.A.R.V.I.S. es realmente 100% local y privado?',
+        faq1A: 'Sí. M.A.R.V.I.S. ejecuta todo el procesamiento en la CPU/GPU de tu equipo. Ningún texto, prompt ni archivo personal se envía a servidores en la nube.',
+        faq2Q: '¿Cómo funciona el pago? ¿Hay costos ocultos?',
+        faq2A: 'M.A.R.V.I.S. se adquiere a través de itch.io mediante pago único. No hay suscripciones mensuales ni compras dentro del programa.',
+        faq3Q: '¿Dónde puedo recibir soporte o sugerir funciones?',
+        faq3A: '¡Únete a nuestra comunidad oficial de Discord! Allí puedes reportar errores, sugerir widgets HUD, compartir capturas y hablar directamente con MDev Studios.'
       }
     };
 
@@ -703,6 +875,7 @@
       document.getElementById('hero-desc').textContent = t.desc;
       document.getElementById('btn-download').textContent = t.download;
       document.getElementById('btn-gamejolt').textContent = t.gamejolt;
+      document.getElementById('btn-discord').textContent = t.discordBtn;
 
       document.getElementById('about-title').textContent = t.aboutTitle;
       document.getElementById('about-desc').innerHTML = t.aboutDesc;
@@ -759,6 +932,28 @@
       document.getElementById('l3-f3').textContent = t.l3F3;
       document.getElementById('l3-f4').textContent = t.l3F4;
       document.getElementById('l3-btn').textContent = t.l3Btn;
+
+      document.getElementById('specs-title').textContent = t.specsTitle;
+      document.getElementById('req-min-title').textContent = t.reqMinTitle;
+      document.getElementById('req-rec-title').textContent = t.reqRecTitle;
+      document.getElementById('min-os').innerHTML = t.minOs;
+      document.getElementById('min-cpu').innerHTML = t.minCpu;
+      document.getElementById('min-ram').innerHTML = t.minRam;
+      document.getElementById('min-gpu').innerHTML = t.minGpu;
+      document.getElementById('min-disk').innerHTML = t.minDisk;
+      document.getElementById('rec-os').innerHTML = t.recOs;
+      document.getElementById('rec-cpu').innerHTML = t.recCpu;
+      document.getElementById('rec-ram').innerHTML = t.recRam;
+      document.getElementById('rec-gpu').innerHTML = t.recGpu;
+      document.getElementById('rec-disk').innerHTML = t.recDisk;
+
+      document.getElementById('faq-title').textContent = t.faqTitle;
+      document.getElementById('faq1-q').textContent = t.faq1Q;
+      document.getElementById('faq1-a').textContent = t.faq1A;
+      document.getElementById('faq2-q').textContent = t.faq2Q;
+      document.getElementById('faq2-a').textContent = t.faq2A;
+      document.getElementById('faq3-q').textContent = t.faq3Q;
+      document.getElementById('faq3-a').textContent = t.faq3A;
     }
   </script>
 
