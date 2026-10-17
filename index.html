@@ -11,6 +11,7 @@
       --accent-color: #00E5FF;
       --text-color: #e0e0e0;
       --text-dim: #a0a0a0;
+      --border-color: #1a1d24;
     }
     body {
       background-color: var(--bg-color);
@@ -120,28 +121,72 @@
       color: var(--accent-color);
       transform: translateY(-2px);
     }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+
+    /* SECCIÓN ¿QUÉ ES MARVIS? */
+    .about-section {
       max-width: 1000px;
       width: 90%;
-      margin: 50px 0;
-    }
-    .card {
+      margin: 60px 0;
       background: var(--card-bg);
-      border: 1px solid #1a1d24;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .about-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .about-header h2 {
+      font-size: 2.2rem;
+      color: #ffffff;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+    .about-header p {
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      max-width: 750px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 25px;
-      transition: border 0.3s;
+      transition: all 0.3s ease;
     }
-    .card:hover {
+    .pillar-card:hover {
       border-color: var(--accent-color);
+      transform: translateY(-3px);
     }
-    .card h3 {
+    .pillar-card .icon {
+      font-size: 1.8rem;
       color: var(--accent-color);
-      margin-top: 0;
+      margin-bottom: 15px;
+      font-family: 'Courier New', Courier, monospace;
     }
+    .pillar-card h3 {
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .pillar-card p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
     footer {
       margin-top: auto;
       padding: 30px;
@@ -165,6 +210,7 @@
     <div class="logo">M.A.R.V.I.S.</div>
   </header>
 
+  <!-- HERO SECTION -->
   <main class="hero">
     <div class="hud-tag">// SYSTEM INITIALIZED: M.A.R.V.I.S. PROTOCOL</div>
     <h1 class="main-title">M.A.R.V.I.S.</h1>
@@ -181,18 +227,34 @@
     </div>
   </main>
 
-  <section class="features">
-    <div class="card">
-      <h3>100% Local & Privado</h3>
-      <p>Todo el procesamiento se realiza en tu máquina. Tus datos no van a servidores externos.</p>
+  <!-- SECCIÓN ¿QUÉ ES MARVIS? -->
+  <section class="about-section">
+    <div class="about-header">
+      <div class="hud-tag">// CORE PHILOSOPHY</div>
+      <h2>¿Qué es M.A.R.V.I.S.?</h2>
+      <p>
+        M.A.R.V.I.S. nace con la misión de construir el <strong>asistente de IA de escritorio definitivo</strong>. A diferencia de las soluciones basadas en la nube que dependen de suscripciones y rastrean tus datos, M.A.R.V.I.S. funciona de manera <strong>100% local en tu computadora</strong>. Se adapta exactamente a tus gustos, preferencias y dedicaciones para ejecutar las tareas que necesitas en tu flujo de trabajo diario.
+      </p>
     </div>
-    <div class="card">
-      <h3>Sin Suscripciones</h3>
-      <p>Olvídate de pagos mensuales. Modelo de pago único pensado para usuarios avanzados.</p>
-    </div>
-    <div class="card">
-      <h3>Interfaz HUD Modular</h3>
-      <p>Diseño inspirado en interfaces de alta tecnología con widgets personalizables según tu perfil.</p>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="icon">[01]</div>
+        <h3>100% Local y Privado</h3>
+        <p>Todo el procesamiento se ejecuta nativamente en el hardware de tu equipo. Tus archivos, código y conversaciones nunca salen de tu PC ni se envían a servidores externos.</p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="icon">[02]</div>
+        <h3>Hiper-Personalizable</h3>
+        <p>Aprende tu rutina, tus preferencias e intereses específicos. Configura sus módulos HUD y comportamiento según tu perfil: programador, gamer, creador o estudiante.</p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="icon">[03]</div>
+        <h3>Asistente Activo de PC</h3>
+        <p>No se limita a responder preguntas. M.A.R.V.I.S. interactúa con tu sistema operativo para lanzar programas, organizar tu escritorio y automatizar tareas repetitivas.</p>
+      </div>
     </div>
   </section>
 
