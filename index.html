@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,6 +38,26 @@
       letter-spacing: 2px;
       color: var(--accent-color);
       font-size: 1.2rem;
+    }
+    .lang-switcher {
+      display: flex;
+      gap: 5px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      background: rgba(0, 229, 255, 0.05);
     }
     .hero {
       text-align: center;
@@ -261,17 +281,110 @@
       line-height: 1.6;
       margin: 0;
     }
-    .version-note {
-      margin-top: 30px;
-      padding: 15px;
-      background: rgba(0, 229, 255, 0.05);
-      border-left: 3px solid var(--accent-color);
-      border-radius: 4px;
-      font-size: 0.88rem;
-      color: var(--text-dim);
+
+    /* SECCIÓN DE LICENCIAS / PRECIOS */
+    .pricing-section {
+      max-width: 1000px;
+      width: 90%;
+      margin: 60px 0 40px 0;
     }
-    .version-note strong {
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .price-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 35px 25px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .price-card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-4px);
+    }
+    .price-card.featured {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
+    }
+    .badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--accent-color);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 12px;
+      letter-spacing: 1px;
+    }
+    .price-card h3 {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin: 0 0 10px 0;
+    }
+    .price {
+      font-size: 2.5rem;
+      font-weight: 900;
       color: var(--accent-color);
+      margin-bottom: 5px;
+    }
+    .price-type {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+      flex-grow: 1;
+    }
+    .price-card li {
+      color: var(--text-color);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+    }
+    .price-card li::before {
+      content: "✓";
+      color: var(--accent-color);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .price-btn {
+      display: block;
+      text-align: center;
+      padding: 12px 0;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .price-btn.outline {
+      border: 1px solid var(--border-color);
+      color: #ffffff;
+    }
+    .price-btn.outline:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+    .price-btn.fill {
+      background: var(--accent-color);
+      color: #000000;
+    }
+    .price-btn.fill:hover {
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
     }
 
     footer {
@@ -295,22 +408,26 @@
 
   <header>
     <div class="logo">M.A.R.V.I.S.</div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+      <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+    </div>
   </header>
 
   <!-- HERO SECTION -->
   <main class="hero">
     <div class="hud-tag">// SYSTEM INITIALIZED: M.A.R.V.I.S. PROTOCOL</div>
     <h1 class="main-title">M.A.R.V.I.S.</h1>
-    <h2 class="sub-slogan">
-      ChatGPT te dice cómo hacer las cosas. <br>
-      <span class="highlight">M.A.R.V.I.S. las hace por ti en tu PC.</span>
+    <h2 class="sub-slogan" id="hero-slogan">
+      ChatGPT tells you how to do things. <br>
+      <span class="highlight">M.A.R.V.I.S. does them for you on your PC.</span>
     </h2>
-    <p class="hero-description">
-      El asistente de escritorio de inteligencia artificial local-first definitivo. Diseñado para rendimiento, privacidad absoluta, control total y cero suscripciones mensuales.
+    <p class="hero-description" id="hero-desc">
+      The ultimate local-first AI desktop assistant. Built for performance, absolute privacy, full system control, and zero monthly subscriptions.
     </p>
     <div class="cta-group">
-      <a href="https://marvisai.itch.io/marvis" class="cta-btn primary" target="_blank">DESCARGAR / ITCH.IO</a>
-      <a href="https://www.tiktok.com/@getmarvis" class="cta-btn secondary" target="_blank">VER DEMO EN TIKTOK</a>
+      <a href="https://marvisai.itch.io/marvis" class="cta-btn primary" target="_blank" id="btn-download">DOWNLOAD / ITCH.IO</a>
+      <a href="https://gamejolt.com/games/MarvisIA/1108163" class="cta-btn secondary" target="_blank" id="btn-gamejolt">GAME JOLT DEVLOG</a>
     </div>
   </main>
 
@@ -318,29 +435,29 @@
   <section class="about-section">
     <div class="about-header">
       <div class="hud-tag">// CORE PHILOSOPHY</div>
-      <h2>¿Qué es M.A.R.V.I.S.?</h2>
-      <p>
-        M.A.R.V.I.S. nace con la misión de construir el <strong>asistente de IA de escritorio definitivo</strong>. A diferencia de las soluciones basadas en la nube que dependen de suscripciones y rastrean tus datos, M.A.R.V.I.S. funciona de manera <strong>100% local en tu computadora</strong>. Se adapta exactamente a tus gustos, preferencias y dedicaciones para ejecutar las tareas que necesitas en tu flujo de trabajo diario.
+      <h2 id="about-title">What is M.A.R.V.I.S.?</h2>
+      <p id="about-desc">
+        M.A.R.V.I.S. was created with a clear mission: building the <strong>ultimate desktop AI assistant</strong>. Unlike cloud solutions that force monthly subscriptions and track your data, M.A.R.V.I.S. runs <strong>100% locally on your PC</strong>. It adapts precisely to your preferences, daily routines, and specialized tasks.
       </p>
     </div>
 
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="icon">[01]</div>
-        <h3>100% Local y Privado</h3>
-        <p>Todo el procesamiento se ejecuta nativamente en el hardware de tu equipo. Tus archivos, código y conversaciones nunca salen de tu PC ni se envían a servidores externos.</p>
+        <h3 id="p1-title">100% Local & Private</h3>
+        <p id="p1-desc">All processing runs natively on your hardware. Your files, code, and conversations never leave your computer or touch cloud servers.</p>
       </div>
 
       <div class="pillar-card">
         <div class="icon">[02]</div>
-        <h3>Hiper-Personalizable</h3>
-        <p>Aprende tu rutina, tus preferencias e intereses específicos. Configura sus módulos HUD y comportamiento según tu perfil: programador, gamer, creador o estudiante.</p>
+        <h3 id="p2-title">Hyper-Personalized</h3>
+        <p id="p2-desc">Learns your routine, specific workflow, and interests. Customize its HUD modules according to your role: developer, gamer, creator, or student.</p>
       </div>
 
       <div class="pillar-card">
         <div class="icon">[03]</div>
-        <h3>Asistente Activo de PC</h3>
-        <p>No se limita a responder preguntas. M.A.R.V.I.S. interactúa con tu sistema operativo para lanzar programas, organizar tu escritorio y automatizar tareas repetitivas.</p>
+        <h3 id="p3-title">Active PC Assistant</h3>
+        <p id="p3-desc">Not just a chat box. M.A.R.V.I.S. interacts directly with your OS to launch applications, organize your desktop, and automate daily tasks.</p>
       </div>
     </div>
   </section>
@@ -349,51 +466,103 @@
   <section class="features-section">
     <div class="section-title">
       <div class="hud-tag">// SYSTEM UTILITIES</div>
-      <h2>Funcionalidades Esenciales</h2>
+      <h2 id="utilities-title">Essential Features</h2>
     </div>
 
     <div class="features-grid">
       <div class="feature-card">
-        <h3>Gestión de Información</h3>
-        <p>Resúmenes instantáneos de textos y PDFs, explicaciones de conceptos complejos y consultas generales al instante.</p>
+        <h3 id="f1-title">Information Management</h3>
+        <p id="f1-desc">Instant text and PDF summarization, complex concept explanations, and quick local queries.</p>
       </div>
       <div class="feature-card">
-        <h3>Redacción y Contenido</h3>
-        <p>Corrección ortográfica, reescritura de correos, generación de borradores y sesiones de tormenta de ideas (brainstorming).</p>
+        <h3 id="f2-title">Content & Writing</h3>
+        <p id="f2-desc">Grammar correction, email rewriting, draft generation, and creative brainstorming sessions.</p>
       </div>
       <div class="feature-card">
-        <h3>Productividad y Organización</h3>
-        <p>Gestión de tareas, alarmas, temporizadores, conversiones matemáticas y monetarias sin salir de tu flujo de trabajo.</p>
+        <h3 id="f3-title">Productivity & Org</h3>
+        <p id="f3-desc">Task management, alarms, timers, currency and math conversions without breaking your workflow.</p>
       </div>
       <div class="feature-card">
-        <h3>Control y Entretenimiento</h3>
-        <p>Lanzamiento rápido de aplicaciones, monitoreo de hardware (CPU/RAM) y control multimedia local mediante voz (ej. Spotify).</p>
+        <h3 id="f4-title">System & Media Control</h3>
+        <p id="f4-desc">Quick app launching, live CPU/RAM monitoring, and hands-free local media playback (e.g. Spotify).</p>
       </div>
     </div>
 
     <!-- BLOQUE PERSONALIZACIÓN Y MODULARIDAD -->
     <div class="customization-box">
       <div class="hud-tag">// INTERFACE & MODULARITY</div>
-      <h3>Filosofía de Personalización Total</h3>
-      <p style="color: var(--text-dim); margin-bottom: 20px;">M.A.R.V.I.S. otorga al usuario el control absoluto de su entorno de trabajo:</p>
+      <h3 id="mod-title">Total Personalization Philosophy</h3>
+      <p id="mod-sub" style="color: var(--text-dim); margin-bottom: 20px;">M.A.R.V.I.S. gives you complete ownership over your workspace interface:</p>
 
       <div class="custom-grid">
         <div class="custom-item">
-          <h4>Widgets Modulares Drag-and-Drop</h4>
-          <p>Reorganiza, acopla o desacopla barras laterales y elige qué widgets mostrar en pantalla (clima, CPU, reproductor, notas, terminal).</p>
+          <h4 id="m1-title">Drag-and-Drop Modular Widgets</h4>
+          <p id="m1-desc">Reorganize, dock, or undock sidebars and pick which widgets to show (weather, CPU, media player, notes, terminal).</p>
         </div>
         <div class="custom-item">
-          <h4>Temas Visuales Adaptativos</h4>
-          <p>Opciones de diseño que van desde el estilo neón/cyberpunk clásico hasta modos minimalistas de alto rendimiento (Modo Gamer).</p>
+          <h4 id="m2-title">Adaptive Visual Themes</h4>
+          <p id="m2-desc">Visual styles ranging from high-tech cyberpunk neon to minimalist high-performance themes (Gamer Mode).</p>
         </div>
         <div class="custom-item">
-          <h4>Perfiles Inteligentes Contextuales</h4>
-          <p>El asistente ajusta su consumo de recursos y herramientas disponibles automáticamente según la actividad que detecte en tu PC.</p>
+          <h4 id="m3-title">Contextual Smart Profiles</h4>
+          <p id="m3-desc">The assistant automatically adjusts resource consumption and active tools based on what you are doing on your PC.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="version-note">
-        <strong>* NOTA DE EDICIÓN:</strong> La disponibilidad de los widgets avanzados, el nivel de personalización modular y los perfiles contextuales automáticos varían según la licencia elegida (Edición Estándar, Pro o Deluxe).
+  <!-- SECCIÓN DE LICENCIAS Y MONETIZACIÓN -->
+  <section class="pricing-section">
+    <div class="section-title">
+      <div class="hud-tag">// ONE-TIME PURCHASE</div>
+      <h2 id="pricing-title">One-Time Licenses</h2>
+      <p id="pricing-sub" style="color: var(--text-dim); max-width: 650px; margin: 10px auto 0 auto; line-height: 1.6;">
+        No monthly fees or hidden costs. Buy your license once and M.A.R.V.I.S. is yours forever.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- NIVEL GRATUITO -->
+      <div class="price-card">
+        <h3 id="l1-title">Standard</h3>
+        <div class="price">$0 <span style="font-size: 1rem; color: var(--text-dim);">USD</span></div>
+        <div class="price-type" id="l1-type">Free Forever</div>
+        <ul>
+          <li id="l1-f1">Basic local AI processing</li>
+          <li id="l1-f2">Text summarization & Q&A</li>
+          <li id="l1-f3">Daily desktop productivity tools</li>
+          <li id="l1-f4">Standard HUD interface</li>
+        </ul>
+        <a href="https://marvisai.itch.io/marvis" class="price-btn outline" target="_blank" id="l1-btn">TRY FOR FREE</a>
+      </div>
+
+      <!-- NIVEL PRO -->
+      <div class="price-card featured">
+        <div class="badge" id="badge-popular">MOST POPULAR</div>
+        <h3 id="l2-title">Pro Tier</h3>
+        <div class="price">$10 <span style="font-size: 1rem; color: var(--text-dim);">USD</span></div>
+        <div class="price-type" id="l2-type">One-Time Payment</div>
+        <ul>
+          <li id="l2-f1">Everything in Standard tier</li>
+          <li id="l2-f2">Contextual screen awareness</li>
+          <li id="l2-f3">Long-term adaptive memory</li>
+          <li id="l2-f4">Advanced Drag-and-Drop HUD widgets</li>
+        </ul>
+        <a href="https://marvisai.itch.io/marvis" class="price-btn fill" target="_blank" id="l2-btn">GET PRO</a>
+      </div>
+
+      <!-- NIVEL DELUXE -->
+      <div class="price-card">
+        <h3 id="l3-title">Deluxe Tier</h3>
+        <div class="price">$20 <span style="font-size: 1rem; color: var(--text-dim);">USD</span></div>
+        <div class="price-type" id="l3-type">One-Time Payment</div>
+        <ul>
+          <li id="l3-f1">Everything in Pro tier</li>
+          <li id="l3-f2">Full automation & RPA macros</li>
+          <li id="l3-f3">Autonomous code & document generation</li>
+          <li id="l3-f4">Native executable terminal control</li>
+        </ul>
+        <a href="https://marvisai.itch.io/marvis" class="price-btn outline" target="_blank" id="l3-btn">GET DELUXE</a>
       </div>
     </div>
   </section>
@@ -402,10 +571,196 @@
     <p>© M.A.R.V.I.S. AI — MDevStudios</p>
     <div>
       <a href="https://www.tiktok.com/@getmarvis" target="_blank">TikTok</a> | 
+      <a href="https://gamejolt.com/games/MarvisIA/1108163" target="_blank">Game Jolt</a> | 
       <a href="https://marvisai.itch.io/marvis" target="_blank">itch.io</a> | 
       <a href="https://reddit.com/r/MarvisAI" target="_blank">Reddit</a>
     </div>
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        slogan: 'ChatGPT tells you how to do things. <br><span class="highlight">M.A.R.V.I.S. does them for you on your PC.</span>',
+        desc: 'The ultimate local-first AI desktop assistant. Built for performance, absolute privacy, full system control, and zero monthly subscriptions.',
+        download: 'DOWNLOAD / ITCH.IO',
+        gamejolt: 'GAME JOLT DEVLOG',
+        aboutTitle: 'What is M.A.R.V.I.S.?',
+        aboutDesc: 'M.A.R.V.I.S. was created with a clear mission: building the <strong>ultimate desktop AI assistant</strong>. Unlike cloud solutions that force monthly subscriptions and track your data, M.A.R.V.I.S. runs <strong>100% locally on your PC</strong>. It adapts precisely to your preferences, daily routines, and specialized tasks.',
+        p1Title: '100% Local & Private',
+        p1Desc: 'All processing runs natively on your hardware. Your files, code, and conversations never leave your computer or touch cloud servers.',
+        p2Title: 'Hyper-Personalized',
+        p2Desc: 'Learns your routine, specific workflow, and interests. Customize its HUD modules according to your role: developer, gamer, creator, or student.',
+        p3Title: 'Active PC Assistant',
+        p3Desc: 'Not just a chat box. M.A.R.V.I.S. interacts directly with your OS to launch applications, organize your desktop, and automate daily tasks.',
+        utilitiesTitle: 'Essential Features',
+        f1Title: 'Information Management',
+        f1Desc: 'Instant text and PDF summarization, complex concept explanations, and quick local queries.',
+        f2Title: 'Content & Writing',
+        f2Desc: 'Grammar correction, email rewriting, draft generation, and creative brainstorming sessions.',
+        f3Title: 'Productivity & Org',
+        f3Desc: 'Task management, alarms, timers, currency and math conversions without breaking your workflow.',
+        f4Title: 'System & Media Control',
+        f4Desc: 'Quick app launching, live CPU/RAM monitoring, and hands-free local media playback (e.g. Spotify).',
+        modTitle: 'Total Personalization Philosophy',
+        modSub: 'M.A.R.V.I.S. gives you complete ownership over your workspace interface:',
+        m1Title: 'Drag-and-Drop Modular Widgets',
+        m1Desc: 'Reorganize, dock, or undock sidebars and pick which widgets to show (weather, CPU, media player, notes, terminal).',
+        m2Title: 'Adaptive Visual Themes',
+        m2Desc: 'Visual styles ranging from high-tech cyberpunk neon to minimalist high-performance themes (Gamer Mode).',
+        m3Title: 'Contextual Smart Profiles',
+        m3Desc: 'The assistant automatically adjusts resource consumption and active tools based on what you are doing on your PC.',
+        pricingTitle: 'One-Time Licenses',
+        pricingSub: 'No monthly fees or hidden costs. Buy your license once and M.A.R.V.I.S. is yours forever.',
+        badgePopular: 'MOST POPULAR',
+        l1Title: 'Standard',
+        l1Type: 'Free Forever',
+        l1F1: 'Basic local AI processing',
+        l1F2: 'Text summarization & Q&A',
+        l1F3: 'Daily desktop productivity tools',
+        l1F4: 'Standard HUD interface',
+        l1Btn: 'TRY FOR FREE',
+        l2Title: 'Pro Tier',
+        l2Type: 'One-Time Payment',
+        l2F1: 'Everything in Standard tier',
+        l2F2: 'Contextual screen awareness',
+        l2F3: 'Long-term adaptive memory',
+        l2F4: 'Advanced Drag-and-Drop HUD widgets',
+        l2Btn: 'GET PRO',
+        l3Title: 'Deluxe Tier',
+        l3Type: 'One-Time Payment',
+        l3F1: 'Everything in Pro tier',
+        l3F2: 'Full automation & RPA macros',
+        l3F3: 'Autonomous code & document generation',
+        l3F4: 'Native executable terminal control',
+        l3Btn: 'GET DELUXE'
+      },
+      es: {
+        slogan: 'ChatGPT te dice cómo hacer las cosas. <br><span class="highlight">M.A.R.V.I.S. las hace por ti en tu PC.</span>',
+        desc: 'El asistente de escritorio de inteligencia artificial local-first definitivo. Diseñado para rendimiento, privacidad absoluta, control total y cero suscripciones mensuales.',
+        download: 'DESCARGAR / ITCH.IO',
+        gamejolt: 'GAME JOLT DEVLOG',
+        aboutTitle: '¿Qué es M.A.R.V.I.S.?',
+        aboutDesc: 'M.A.R.V.I.S. nace con la misión de construir el <strong>asistente de IA de escritorio definitivo</strong>. A diferencia de las soluciones basadas en la nube que dependen de suscripciones y rastrean tus datos, M.A.R.V.I.S. funciona de manera <strong>100% local en tu computadora</strong>. Se adapta exactamente a tus gustos, preferencias y dedicaciones para ejecutar las tareas que necesitas en tu flujo de trabajo diario.',
+        p1Title: '100% Local y Privado',
+        p1Desc: 'Todo el procesamiento se ejecuta nativamente en el hardware de tu equipo. Tus archivos, código y conversaciones nunca salen de tu PC ni se envían a servidores externos.',
+        p2Title: 'Hiper-Personalizable',
+        p2Desc: 'Aprende tu rutina, tus preferencias e intereses específicos. Configura sus módulos HUD y comportamiento según tu perfil: programador, gamer, creador o estudiante.',
+        p3Title: 'Asistente Activo de PC',
+        p3Desc: 'No se limita a responder preguntas. M.A.R.V.I.S. interactúa con tu sistema operativo para lanzar programas, organizar tu escritorio y automatizar tareas repetitivas.',
+        utilitiesTitle: 'Funcionalidades Esenciales',
+        f1Title: 'Gestión de Información',
+        f1Desc: 'Resúmenes instantáneos de textos y PDFs, explicaciones de conceptos complejos y consultas generales al instante.',
+        f2Title: 'Redacción y Contenido',
+        f2Desc: 'Corrección ortográfica, reescritura de correos, generación de borradores y sesiones de tormenta de ideas (brainstorming).',
+        f3Title: 'Productividad y Organización',
+        f3Desc: 'Gestión de tareas, alarmas, temporizadores, conversiones matemáticas y monetarias sin salir de tu flujo de trabajo.',
+        f4Title: 'Control y Entretenimiento',
+        f4Desc: 'Lanzamiento rápido de aplicaciones, monitoreo de hardware (CPU/RAM) y control multimedia local mediante voz (ej. Spotify).',
+        modTitle: 'Filosofía de Personalización Total',
+        modSub: 'M.A.R.V.I.S. otorga al usuario el control absoluto de su entorno de trabajo:',
+        m1Title: 'Widgets Modulares Drag-and-Drop',
+        m1Desc: 'Reorganiza, acopla o desacopla barras laterales y elige qué widgets mostrar en pantalla (clima, CPU, reproductor, notas, terminal).',
+        m2Title: 'Temas Visuales Adaptativos',
+        m2Desc: 'Opciones de diseño que van desde el estilo neón/cyberpunk clásico hasta modos minimalistas de alto rendimiento (Modo Gamer).',
+        m3Title: 'Perfiles Inteligentes Contextuales',
+        m3Desc: 'El asistente ajusta su consumo de recursos y herramientas disponibles automáticamente según la actividad que detecte en tu PC.',
+        pricingTitle: 'Licencias de Pago Único',
+        pricingSub: 'Sin mensualidades ni costos ocultos. Compras tu licencia una vez y M.A.R.V.I.S. es tuyo para siempre.',
+        badgePopular: 'MÁS POPULAR',
+        l1Title: 'Estándar',
+        l1Type: 'Gratis para siempre',
+        l1F1: 'Procesamiento local básico',
+        l1F2: 'Gestión de información y resumen de textos',
+        l1F3: 'Herramientas diarias de productividad',
+        l1F4: 'Interfaz HUD básica',
+        l1Btn: 'PROBAR GRATIS',
+        l2Title: 'Nivel Pro',
+        l2Type: 'Pago Único',
+        l2F1: 'Todo lo incluido en Nivel Estándar',
+        l2F2: 'Conciencia de pantalla contextual',
+        l2F3: 'Memoria a largo plazo adaptativa',
+        l2F4: 'Widgets interactivos avanzados con Drag-and-Drop',
+        l2Btn: 'OBTENER PRO',
+        l3Title: 'Nivel Deluxe',
+        l3Type: 'Pago Único',
+        l3F1: 'Todo lo incluido en Nivel Pro',
+        l3F2: 'Automatización total y RPA mediante macros',
+        l3F3: 'Generación autónoma de código y documentos',
+        l3F4: 'Control de terminal ejecutable nativo',
+        l3Btn: 'OBTENER DELUXE'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.textContent.toLowerCase() === lang);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+
+      document.getElementById('hero-slogan').innerHTML = t.slogan;
+      document.getElementById('hero-desc').textContent = t.desc;
+      document.getElementById('btn-download').textContent = t.download;
+      document.getElementById('btn-gamejolt').textContent = t.gamejolt;
+
+      document.getElementById('about-title').textContent = t.aboutTitle;
+      document.getElementById('about-desc').innerHTML = t.aboutDesc;
+      document.getElementById('p1-title').textContent = t.p1Title;
+      document.getElementById('p1-desc').textContent = t.p1Desc;
+      document.getElementById('p2-title').textContent = t.p2Title;
+      document.getElementById('p2-desc').textContent = t.p2Desc;
+      document.getElementById('p3-title').textContent = t.p3Title;
+      document.getElementById('p3-desc').textContent = t.p3Desc;
+
+      document.getElementById('utilities-title').textContent = t.utilitiesTitle;
+      document.getElementById('f1-title').textContent = t.f1Title;
+      document.getElementById('f1-desc').textContent = t.f1Desc;
+      document.getElementById('f2-title').textContent = t.f2Title;
+      document.getElementById('f2-desc').textContent = t.f2Desc;
+      document.getElementById('f3-title').textContent = t.f3Title;
+      document.getElementById('f3-desc').textContent = t.f3Desc;
+      document.getElementById('f4-title').textContent = t.f4Title;
+      document.getElementById('f4-desc').textContent = t.f4Desc;
+
+      document.getElementById('mod-title').textContent = t.modTitle;
+      document.getElementById('mod-sub').textContent = t.modSub;
+      document.getElementById('m1-title').textContent = t.m1Title;
+      document.getElementById('m1-desc').textContent = t.m1Desc;
+      document.getElementById('m2-title').textContent = t.m2Title;
+      document.getElementById('m2-desc').textContent = t.m2Desc;
+      document.getElementById('m3-title').textContent = t.m3Title;
+      document.getElementById('m3-desc').textContent = t.m3Desc;
+
+      document.getElementById('pricing-title').textContent = t.pricingTitle;
+      document.getElementById('pricing-sub').textContent = t.pricingSub;
+      document.getElementById('badge-popular').textContent = t.badgePopular;
+
+      document.getElementById('l1-title').textContent = t.l1Title;
+      document.getElementById('l1-type').textContent = t.l1Type;
+      document.getElementById('l1-f1').textContent = t.l1F1;
+      document.getElementById('l1-f2').textContent = t.l1F2;
+      document.getElementById('l1-f3').textContent = t.l1F3;
+      document.getElementById('l1-f4').textContent = t.l1F4;
+      document.getElementById('l1-btn').textContent = t.l1Btn;
+
+      document.getElementById('l2-title').textContent = t.l2Title;
+      document.getElementById('l2-type').textContent = t.l2Type;
+      document.getElementById('l2-f1').textContent = t.l2F1;
+      document.getElementById('l2-f2').textContent = t.l2F2;
+      document.getElementById('l2-f3').textContent = t.l2F3;
+      document.getElementById('l2-f4').textContent = t.l2F4;
+      document.getElementById('l2-btn').textContent = t.l2Btn;
+
+      document.getElementById('l3-title').textContent = t.l3Title;
+      document.getElementById('l3-type').textContent = t.l3Type;
+      document.getElementById('l3-f1').textContent = t.l3F1;
+      document.getElementById('l3-f2').textContent = t.l3F2;
+      document.getElementById('l3-f3').textContent = t.l3F3;
+      document.getElementById('l3-f4').textContent = t.l3F4;
+      document.getElementById('l3-btn').textContent = t.l3Btn;
+    }
+  </script>
 
 </body>
 </html>
